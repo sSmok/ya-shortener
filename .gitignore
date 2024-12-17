@@ -17,7 +17,10 @@ cmd/shortener/shortener
 
 # Dependency directories (remove the comment below to include it)
 vendor/
+# binaries for programs and plugins
+bin
 
 # IDEs directories
 .idea
+.DS_Store
 .vscode
