@@ -3,13 +3,16 @@ package main
 import (
 	"log"
 
-	"github.com/sSmok/ya-shortener/internal/api/link"
+	"github.com/sSmok/ya-shortener/internal/app"
 )
 
 func main() {
-	api := link.NewAPI()
-	err := api.Run()
+	newApp, err := app.NewApp()
 	if err != nil {
-		log.Fatalf(`fail to run server: %v`, err)
+		log.Fatalf("failed to create app: %v", err)
+	}
+	err = newApp.Run()
+	if err != nil {
+		log.Fatalf("failed to run app: %v", err)
 	}
 }
