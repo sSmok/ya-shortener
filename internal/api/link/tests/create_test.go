@@ -89,7 +89,7 @@ func TestAPI_Create(t *testing.T) {
 				t.Fatalf("failed to read response body: %v", err)
 			}
 
-			require.Equal(t, tt.expectedBody, body)
+			require.Equal(t, tt.expectedBody, string(body))
 		})
 	}
 }
