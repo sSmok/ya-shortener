@@ -9,4 +9,4 @@ test-all:
 	make test-shortenertestbeta
 	make lint
 test-shortenertestbeta:
-	$(LOCAL_BIN)/shortenertestbeta -test.v -test.run=^TestIteration2$$ -binary-path=/Users/admin/go_projects/yandex/ya-shortener/cmd/shortener/shortener
+	$(LOCAL_BIN)/shortenertestbeta -test.v -test.run=^TestIteration2$$ -source-path=.
