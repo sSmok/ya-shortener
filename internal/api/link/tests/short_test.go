@@ -21,6 +21,7 @@ func TestAPI_Short(t *testing.T) {
 		minimockContr = minimock.NewController(t)
 		originalURL   = "http://example.com"
 		repoErr       = errors.New("repository error")
+		baseURL       = "http://localhost:8080/"
 	)
 
 	tests := []struct {
@@ -70,7 +71,7 @@ func TestAPI_Short(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			api := link.NewAPI(tt.linkRepositoryMock(minimockContr))
+			api := link.NewAPI(tt.linkRepositoryMock(minimockContr), baseURL)
 
 			req := httptest.NewRequest(tt.method, "/"+tt.shortID, nil)
 			w := httptest.NewRecorder()

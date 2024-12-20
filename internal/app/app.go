@@ -5,9 +5,8 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/sSmok/ya-shortener/internal/config"
 )
-
-const address = "localhost:8080"
 
 // App представляет собой приложение
 type App struct {
@@ -38,6 +37,7 @@ func (a *App) Run() error {
 
 func (a *App) initDeps() error {
 	deps := []func() error{
+		a.initConfig,
 		a.initContainer,
 		a.initMux,
 		a.initHTTPServer,
@@ -67,10 +67,14 @@ func (a *App) initMux() error {
 
 func (a *App) initHTTPServer() error {
 	a.httpServer = &http.Server{
-		Addr:              address,
+		Addr:              a.container.AddressConfig().Address(),
 		ReadHeaderTimeout: 2 * time.Second,
 		Handler:           a.mux,
 	}
 
 	return nil
+}
+
+func (a *App) initConfig() error {
+	return config.Load()
 }
