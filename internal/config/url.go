@@ -1,7 +1,5 @@
 package config
 
-const defaultBaseURL = "http://localhost:8080/"
-
 type urlConfig struct {
 	url string
 }

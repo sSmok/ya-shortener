@@ -33,7 +33,7 @@ func (api *API) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
-	shortURL := fmt.Sprintf("%s%s", api.baseURL, short)
+	shortURL := fmt.Sprintf("%s/%s", api.baseURL, short)
 	_, err = w.Write([]byte(shortURL))
 	if err != nil {
 		return

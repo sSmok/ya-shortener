@@ -20,7 +20,7 @@ func TestAPI_Create(t *testing.T) {
 
 	var (
 		minimockContr = minimock.NewController(t)
-		baseURL       = "http://localhost:8080/"
+		baseURL       = "http://localhost:8080"
 	)
 
 	tests := []struct {
@@ -36,7 +36,7 @@ func TestAPI_Create(t *testing.T) {
 			method:         http.MethodPost,
 			body:           "http://example.com",
 			expectedStatus: http.StatusCreated,
-			expectedBody:   fmt.Sprintf("%s%s", baseURL, "shortURL"),
+			expectedBody:   fmt.Sprintf("%s/%s", baseURL, "shortURL"),
 			linkRepositoryMock: func(mc *minimock.Controller) repository.LinkRepository {
 				mock := mocks.NewLinkRepositoryMock(mc)
 				mock.CreateMock.Return("shortURL", nil)

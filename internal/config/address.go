@@ -1,7 +1,5 @@
 package config
 
-const defaultAddress = "localhost:8080"
-
 type addressConfig struct {
 	address string
 }

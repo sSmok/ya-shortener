@@ -21,7 +21,7 @@ func TestAPI_Short(t *testing.T) {
 		minimockContr = minimock.NewController(t)
 		originalURL   = "http://example.com"
 		repoErr       = errors.New("repository error")
-		baseURL       = "http://localhost:8080/"
+		baseURL       = "http://localhost:8080"
 	)
 
 	tests := []struct {
