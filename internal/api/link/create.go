@@ -7,8 +7,6 @@ import (
 	"net/http"
 )
 
-const address = "localhost:8080"
-
 // Create обрабатывает запросы на создание короткой ссылки
 func (api *API) Create(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -35,7 +33,7 @@ func (api *API) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
-	shortURL := fmt.Sprintf("http://%s/%s", address, short)
+	shortURL := fmt.Sprintf("%s/%s", api.baseURL, short)
 	_, err = w.Write([]byte(shortURL))
 	if err != nil {
 		return
