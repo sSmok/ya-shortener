@@ -2,6 +2,8 @@ package config
 
 import (
 	"flag"
+
+	"github.com/joho/godotenv"
 )
 
 const (
@@ -29,6 +31,11 @@ func Load() error {
 	flag.StringVar(&httpAddress, "a", defaultAddress, "address for HTTP server")
 	flag.StringVar(&baseURL, "b", defaultBaseURL, "base URL for short links")
 	flag.Parse()
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

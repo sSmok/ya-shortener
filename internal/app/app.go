@@ -1,6 +1,7 @@
 package app
 
 import (
+	"log"
 	"net/http"
 	"time"
 
@@ -27,6 +28,7 @@ func NewApp() (*App, error) {
 
 // Run запускает http сервер
 func (a *App) Run() error {
+	log.Printf("server running on %s", a.container.AddressConfig().Address())
 	err := a.httpServer.ListenAndServe()
 	if err != nil {
 		return err
