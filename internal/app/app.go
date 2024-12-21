@@ -3,6 +3,8 @@ package app
 import (
 	"net/http"
 	"time"
+
+	"github.com/go-chi/chi/v5"
 )
 
 const address = "localhost:8080"
@@ -10,7 +12,7 @@ const address = "localhost:8080"
 // App представляет собой приложение
 type App struct {
 	container  *container
-	mux        *http.ServeMux
+	mux        *chi.Mux
 	httpServer *http.Server
 }
 
@@ -57,9 +59,9 @@ func (a *App) initContainer() error {
 }
 
 func (a *App) initMux() error {
-	a.mux = http.NewServeMux()
-	a.mux.HandleFunc("/", a.container.LinkAPI().Create)
-	a.mux.HandleFunc("/{id}", a.container.LinkAPI().Short)
+	a.mux = chi.NewRouter()
+	a.mux.Post("/", a.container.LinkAPI().Create)
+	a.mux.Get("/{id}", a.container.LinkAPI().Short)
 	return nil
 }
 
