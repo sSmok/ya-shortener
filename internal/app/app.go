@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sSmok/ya-shortener/internal/config"
+	"github.com/sSmok/ya-shortener/internal/middleware"
 )
 
 // App представляет собой приложение
@@ -62,6 +63,9 @@ func (a *App) initContainer() error {
 
 func (a *App) initMux() error {
 	a.mux = chi.NewRouter()
+
+	a.mux.Use(middleware.Log)
+
 	a.mux.Post("/", a.container.LinkAPI().Create)
 	a.mux.Get("/{id}", a.container.LinkAPI().Short)
 	return nil

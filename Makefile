@@ -9,4 +9,4 @@ test-all:
 	make test-shortenertestbeta
 	make lint
 test-shortenertestbeta:
-	$(LOCAL_BIN)/shortenertestbeta -test.v -test.run=^TestIteration5$$ -binary-path=cmd/shortener/shortener -server-port=8081
+	$(LOCAL_BIN)/shortenertestbeta -test.v -test.run=^TestIteration6$$ -source-path=.
