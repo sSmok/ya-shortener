@@ -2,6 +2,8 @@ package link
 
 import (
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 // Short обрабатывает запросы по коротким ссылкам и возвращает оригинальную ссылку
@@ -11,7 +13,7 @@ func (api *API) Short(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	short := r.PathValue("id")
+	short := chi.URLParam(r, "id")
 	originalURL, err := api.linkRepo.Get(short)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
