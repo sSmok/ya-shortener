@@ -1,13 +1,14 @@
 package app
 
 import (
-	"log"
 	"net/http"
 	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sSmok/ya-shortener/internal/config"
+	"github.com/sSmok/ya-shortener/internal/logger"
 	"github.com/sSmok/ya-shortener/internal/middleware"
+	"go.uber.org/zap"
 )
 
 // App представляет собой приложение
@@ -29,7 +30,7 @@ func NewApp() (*App, error) {
 
 // Run запускает http сервер
 func (a *App) Run() error {
-	log.Printf("server running on %s", a.container.AddressConfig().Address())
+	logger.Info("http run", zap.String("address", a.container.AddressConfig().Address()))
 	err := a.httpServer.ListenAndServe()
 	if err != nil {
 		return err
@@ -66,8 +67,11 @@ func (a *App) initMux() error {
 
 	a.mux.Use(middleware.Log)
 
+	a.mux.Post("/api/shorten", a.container.LinkAPI().Shorten)
+
 	a.mux.Post("/", a.container.LinkAPI().Create)
 	a.mux.Get("/{id}", a.container.LinkAPI().Short)
+
 	return nil
 }
 
